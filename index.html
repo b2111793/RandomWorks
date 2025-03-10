@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phân Công Công Việc</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 10px;
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-radius: 5px;
+        }
+        .result p {
+            background: #007bff;
+            color: white;
+            padding: 8px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Nhập tên 6 người</h2>
+        <div id="peopleInputs">
+            <input type="text" placeholder="Người 1">
+            <input type="text" placeholder="Người 2">
+            <input type="text" placeholder="Người 3">
+            <input type="text" placeholder="Người 4">
+            <input type="text" placeholder="Người 5">
+            <input type="text" placeholder="Người 6">
+        </div>
+        
+        <button onclick="assignTasks()">Sắp xếp</button>
+        
+        <div class="result" id="result"></div>
+    </div>
+    
+    <script>
+        const tasks = ["1. TRỰC VỆ SINH HÀNH LANG", "2. TRỰC VỆ SINH NHÀ GIỮA", "3. TRỰC VỆ SINH SÀN NHÀ BẾP",  "4. TRỰC VỆ SINH SÀN NHÀ BẾP", "5. TRỰC VỆ SINH NHÀ TẮM", "6. TRỰC VỆ SINH TOILET"];
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function assignTasks() {
+            let people = Array.from(document.querySelectorAll('#peopleInputs input')).map(input => input.value.trim());
+            
+            if (people.includes('')) {
+                alert('Vui lòng nhập đủ 6 người.');
+                return;
+            }
+
+            shuffleArray(people);
+            
+            let resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "";
+            for (let i = 0; i < 6; i++) {
+                resultDiv.innerHTML += `<p>${people[i]} ➝ ${tasks[i]}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
